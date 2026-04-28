@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>قبل النور - رسالة إلى قلب في الجاهلية</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Amiri', serif;
+    overflow: hidden;
+  }
+
+  .scene {
+    position: relative;
+    width: 900px;
+    min-height: 1260px;
+    background: linear-gradient(180deg, #080d14 0%, #0d1a0f 40%, #0e1a10 70%, #060d08 100%);
+    overflow: hidden;
+  }
+
+  /* === STARS === */
+  .stars-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle var(--d,3s) ease-in-out infinite var(--delay,0s);
+  }
+
+  @keyframes twinkle {
+    0%,100% { opacity: var(--min-op, 0.2); transform: scale(1); }
+    50% { opacity: var(--max-op, 1); transform: scale(1.3); }
+  }
+
+  /* === MOON === */
+  .moon-container {
+    position: absolute;
+    top: 30px;
+    right: 60px;
+    animation: moonFloat 8s ease-in-out infinite;
+  }
+
+  @keyframes moonFloat {
+    0%,100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .moon {
+    width: 90px;
+    height: 90px;
+    position: relative;
+  }
+
+  /* === GEOMETRIC PATTERN BG === */
+  .geo-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      repeating-conic-gradient(#d4af37 0deg 10deg, transparent 10deg 30deg),
+      repeating-conic-gradient(#d4af37 0deg 10deg, transparent 10deg 30deg);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+  }
+
+  /* === CORNER ORNAMENTS === */
+  .corner {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    opacity: 0.7;
+  }
+  .corner-tl { top: 0; right: 0; }
+  .corner-tr { top: 0; left: 0; transform: scaleX(-1); }
+  .corner-bl { bottom: 0; right: 0; transform: scaleY(-1); }
+  .corner-br { bottom: 0; left: 0; transform: scale(-1,-1); }
+
+  /* === FRAME BORDERS === */
+  .outer-frame {
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba(212,175,55,0.25);
+  }
+
+  .inner-frame {
+    position: absolute;
+    inset: 30px;
+    border: 1px solid rgba(212,175,55,0.12);
+  }
+
+  /* === CONTENT === */
+  .content {
+    position: relative;
+    z-index: 10;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* === TOP BADGE === */
+  .top-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    animation: fadeInDown 1s ease both 0.2s;
+  }
+
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .badge-line {
+    height: 1px;
+    width: 80px;
+    background: linear-gradient(to left, #d4af37, transparent);
+  }
+
+  .badge-line.rev {
+    background: linear-gradient(to right, #d4af37, transparent);
+  }
+
+  .badge-text {
+    color: #d4af37;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-family: 'Noto Naskh Arabic', serif;
+  }
+
+  /* === MAIN TITLE === */
+  .main-title {
+    font-family: 'Amiri', serif;
+    font-size: 86px;
+    font-weight: 700;
+    color: transparent;
+    background: linear-gradient(135deg, #f5e27a 0%, #d4af37 35%, #b8860b 65%, #d4af37 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-align: center;
+    line-height: 1.1;
+    text-shadow: none;
+    filter: drop-shadow(0 0 40px rgba(212,175,55,0.3));
+    animation: fadeInDown 1s ease both 0.4s;
+    margin-bottom: 8px;
+  }
+
+  /* === SUBTITLE === */
+  .subtitle-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 14px;
+    animation: fadeInDown 1s ease both 0.6s;
+  }
+
+  .subtitle-ornament {
+    color: #d4af37;
+    font-size: 18px;
+    opacity: 0.6;
+  }
+
+  .subtitle {
+    font-family: 'Noto Naskh Arabic', serif;
+    color: #c8a84b;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* === DIVIDER === */
+  .divider {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 16px 0;
+    animation: fadeIn 1.2s ease both 0.8s;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .div-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to left, rgba(212,175,55,0.5), transparent);
+  }
+
+  .div-line.rev {
+    background: linear-gradient(to right, rgba(212,175,55,0.5), transparent);
+  }
+
+  .div-diamond {
+    color: #d4af37;
+    font-size: 12px;
+    letter-spacing: 4px;
+  }
+
+  /* === LETTER CONTAINER === */
+  .letter-container {
+    width: 100%;
+    background: linear-gradient(160deg, rgba(10,20,12,0.9) 0%, rgba(15,28,18,0.95) 100%);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 4px;
+    padding: 44px 50px;
+    position: relative;
+    animation: fadeIn 1.4s ease both 1s;
+    margin-bottom: 0;
+  }
+
+  .letter-container::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    border: 1px solid rgba(212,175,55,0.08);
+    pointer-events: none;
+  }
+
+  /* corner dots */
+  .letter-container::after {
+    content: '◆';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #d4af37;
+    font-size: 14px;
+    background: #0d1a0f;
+    padding: 0 10px;
+  }
+
+  /* === OPENING === */
+  .opening {
+    text-align: center;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .opening-title {
+    font-family: 'Amiri', serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: #f0d060;
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .opening-sub {
+    font-family: 'Amiri', serif;
+    font-size: 19px;
+    color: rgba(212,175,55,0.65);
+    font-style: italic;
+  }
+
+  /* === BODY TEXT === */
+  .letter-body {
+    font-family: 'Amiri', serif;
+    font-size: 22px;
+    line-height: 2;
+    color: #d4c49a;
+    text-align: justify;
+  }
+
+  .letter-body p {
+    margin-bottom: 22px;
+    position: relative;
+  }
+
+  .letter-body p:first-child {
+    font-size: 23px;
+    color: #e2d4a8;
+  }
+
+  /* Pull quote style for certain paragraphs */
+  .letter-body .highlight {
+    color: #e8cf7a;
+    font-weight: 700;
+  }
+
+  .letter-body .verse-style {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    color: #c8a84b;
+    font-style: italic;
+    padding: 12px 0;
+    border-top: 1px solid rgba(212,175,55,0.15);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    margin: 10px 0 22px;
+  }
+
+  .drop-cap {
+    float: right;
+    font-size: 80px;
+    line-height: 0.75;
+    color: #d4af37;
+    margin-left: 8px;
+    margin-top: 8px;
+    font-family: 'Amiri', serif;
+    font-weight: 700;
+  }
+
+  /* === CLOSING === */
+  .closing {
+    text-align: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(212,175,55,0.15);
+  }
+
+  .closing-text {
+    font-family: 'Amiri', serif;
+    font-size: 20px;
+    color: #b89a40;
+    font-style: italic;
+  }
+
+  .closing-heart {
+    font-size: 22px;
+    color: #d4af37;
+    margin-top: 6px;
+    display: block;
+    animation: heartbeat 2.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; }
+  }
+
+  /* === BOTTOM ORNAMENT === */
+  .bottom-ornament {
+    margin-top: 28px;
+    text-align: center;
+    animation: fadeIn 1.5s ease both 1.4s;
+  }
+
+  .bottom-quote {
+    font-family: 'Amiri', serif;
+    font-size: 18px;
+    color: rgba(212,175,55,0.55);
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  /* === GLOW EFFECTS === */
+  .glow-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+  }
+
+  .glow-1 {
+    width: 300px;
+    height: 300px;
+    background: rgba(20,80,30,0.4);
+    top: -50px;
+    right: -80px;
+  }
+
+  .glow-2 {
+    width: 250px;
+    height: 250px;
+    background: rgba(212,175,55,0.06);
+    bottom: 200px;
+    left: -60px;
+  }
+
+  .glow-3 {
+    width: 200px;
+    height: 200px;
+    background: rgba(212,175,55,0.08);
+    top: 400px;
+    right: -40px;
+  }
+
+  /* === LANTERN DECORATION === */
+  .lantern-deco {
+    position: absolute;
+    top: 10px;
+    left: 70px;
+    font-size: 50px;
+    opacity: 0.5;
+    animation: lanternSway 5s ease-in-out infinite;
+    transform-origin: top center;
+  }
+
+  @keyframes lanternSway {
+    0%,100% { transform: rotate(-8deg); }
+    50% { transform: rotate(8deg); }
+  }
+
+  /* Shimmer line effect on title */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .main-title {
+    background-size: 200% auto;
+    animation: shimmer 4s linear infinite;
+  }
+
+  /* === DECORATIVE VERSE LINE === */
+  .verse-line {
+    width: 100%;
+    text-align: center;
+    margin: 6px 0 24px;
+    animation: fadeIn 1.2s ease both 0.9s;
+  }
+
+  .verse-line span {
+    font-family: 'Amiri', serif;
+    font-size: 16px;
+    color: rgba(212,175,55,0.45);
+    letter-spacing: 2px;
+  }
+
+  /* Paragraph icons */
+  .para-icon {
+    color: #d4af37;
+    opacity: 0.6;
+    margin-left: 8px;
+  }
+</style>
+</head>
+<body>
+<div class="scene">
+  <!-- Glow orbs -->
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+  <div class="glow-orb glow-3"></div>
+
+  <!-- Geometric background pattern -->
+  <div class="geo-pattern"></div>
+
+  <!-- Stars -->
+  <div class="stars-layer" id="stars"></div>
+
+  <!-- Moon SVG -->
+  <div class="moon-container">
+    <svg width="80" height="80" viewBox="0 0 80 80">
+      <defs>
+        <filter id="glow-moon">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <circle cx="40" cy="40" r="30" fill="#d4af37" opacity="0.15" filter="url(#glow-moon)"/>
+      <circle cx="40" cy="40" r="28" fill="#f0c030" opacity="0.9"/>
+      <circle cx="52" cy="32" r="22" fill="#0a0e14"/>
+    </svg>
+  </div>
+
+  <!-- Lantern decoration -->
+  <div class="lantern-deco">🪔</div>
+
+  <!-- Corner SVG ornaments -->
+  <svg class="corner corner-tl" viewBox="0 0 140 140" fill="none">
+    <path d="M140 0 Q80 0 60 20 Q40 40 0 40" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    <path d="M140 10 Q90 10 70 30 Q50 50 10 50" stroke="#d4af37" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="10" cy="10" r="4" fill="#d4af37" opacity="0.4"/>
+    <circle cx="25" cy="10" r="2" fill="#d4af37" opacity="0.3"/>
+    <circle cx="10" cy="25" r="2" fill="#d4af37" opacity="0.3"/>
+    <path d="M0 0 L30 0 L0 30 Z" fill="#d4af37" opacity="0.05"/>
+    <path d="M140 0 L140 80 Q100 60 80 40 Q60 20 140 0Z" fill="#1a4a20" opacity="0.2"/>
+  </svg>
+
+  <svg class="corner corner-tr" viewBox="0 0 140 140" fill="none">
+    <path d="M140 0 Q80 0 60 20 Q40 40 0 40" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    <path d="M140 10 Q90 10 70 30 Q50 50 10 50" stroke="#d4af37" stroke-width="0.5" opacity="0.3"/>
+    <circle cx="10" cy="10" r="4" fill="#d4af37" opacity="0.4"/>
+    <path d="M140 0 L140 80 Q100 60 80 40 Q60 20 140 0Z" fill="#1a4a20" opacity="0.2"/>
+  </svg>
+
+  <svg class="corner corner-bl" viewBox="0 0 140 140" fill="none">
+    <path d="M140 0 Q80 0 60 20 Q40 40 0 40" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    <circle cx="10" cy="10" r="4" fill="#d4af37" opacity="0.4"/>
+    <path d="M140 0 L140 80 Q100 60 80 40 Q60 20 140 0Z" fill="#1a4a20" opacity="0.2"/>
+  </svg>
+
+  <svg class="corner corner-br" viewBox="0 0 140 140" fill="none">
+    <path d="M140 0 Q80 0 60 20 Q40 40 0 40" stroke="#d4af37" stroke-width="1" opacity="0.5"/>
+    <circle cx="10" cy="10" r="4" fill="#d4af37" opacity="0.4"/>
+    <path d="M140 0 L140 80 Q100 60 80 40 Q60 20 140 0Z" fill="#1a4a20" opacity="0.2"/>
+  </svg>
+
+  <!-- Frames -->
+  <div class="outer-frame"></div>
+  <div class="inner-frame"></div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <div class="top-badge">
+      <div class="badge-line"></div>
+      <span class="badge-text">✦ سلسلة السيرة النبوية ✦</span>
+      <div class="badge-line rev"></div>
+    </div>
+
+    <div class="main-title">قبل النور</div>
+
+    <div class="subtitle-row">
+      <span class="subtitle-ornament">❧</span>
+      <span class="subtitle">العالم كان ينتظر الهداية</span>
+      <span class="subtitle-ornament">❧</span>
+    </div>
+
+    <div class="verse-line">
+      <span>~ رسالة دعوية من قلب عاش زمن الجاهلية ~</span>
+    </div>
+
+    <div class="divider">
+      <div class="div-line rev"></div>
+      <span class="div-diamond">◆ ❧ ◆</span>
+      <div class="div-line"></div>
+    </div>
+
+    <!-- LETTER -->
+    <div class="letter-container">
+
+      <div class="opening">
+        <div class="opening-title">💦 رسالة إلى قلبٍ في الجاهلية 💦</div>
+        <div class="opening-sub">من قلبٍ يشعل شمعةً في الظلام…</div>
+      </div>
+
+      <div class="letter-body">
+
+        <p>
+          <span class="drop-cap">ي</span>
+          ا قلبًا <span class="highlight">تائهًا</span> بين ظلمات الشرك والضياع…
+          أما آن لك أن تستفيق؟
+        </p>
+
+        <p>
+          نعيش في زمنٍ اختلط فيه الحقُّ بالباطل، أصنامٌ تُعبد، وذنوبٌ تُرتكب بلا حياء، خمرٌ يُذهب العقول، وزنا يُهدم القلوب، وأرواحٌ تُزهق خوفًا من فقرٍ أو عار…
+        </p>
+
+        <em class="verse-style">أين الرحمة؟ وأين النور؟</em>
+
+        <p>
+          يا هذا… إن قلبك لم يُخلق لهذا الظلام،
+          بل خُلق ليعرف <span class="highlight">ربًّا واحدًا لا شريك له</span>،
+          ربًّا يرزقك ويكفيك ويهديك.
+        </p>
+
+        <p>
+          اترك ما يُغضب الله، وارجع إليه بقلبٍ صادق،
+          فما ضلَّ من عرف طريقه إليه.
+        </p>
+
+        <p>
+          واصبر… فإنَّ <span class="highlight">نورًا عظيمًا</span> يوشك أن يشرق،
+          ورسالةُ هدىً ستأتي لتُخرج الناسَ من الظلمات إلى النور،
+          فكن من المنتظرين لها <span class="highlight">بقلبٍ حي</span>.
+        </p>
+
+        <div class="closing">
+          <div class="closing-text">لعلَّك اليوم تائه… لكنك غدًا من المهتدين</div>
+          <span class="closing-heart">🤍</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="divider" style="margin-top: 22px;">
+      <div class="div-line rev"></div>
+      <span class="div-diamond">◆ ❧ ◆</span>
+      <div class="div-line"></div>
+    </div>
+
+    <div class="bottom-ornament">
+      <p class="bottom-quote">
+        "وَمَا أَرْسَلْنَاكَ إِلَّا رَحْمَةً لِّلْعَالَمِينَ"
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Generate stars
+const starsLayer = document.getElementById('stars');
+for (let i = 0; i < 180; i++) {
+  const star = document.createElement('div');
+  star.className = 'star';
+  const size = Math.random() * 2.5 + 0.5;
+  const x = Math.random() * 100;
+  const y = Math.random() * 100;
+  const duration = (Math.random() * 4 + 2).toFixed(1);
+  const delay = (Math.random() * 5).toFixed(1);
+  const minOp = (Math.random() * 0.15 + 0.05).toFixed(2);
+  const maxOp = (Math.random() * 0.5 + 0.5).toFixed(2);
+
+  star.style.cssText = `
+    width: ${size}px;
+    height: ${size}px;
+    left: ${x}%;
+    top: ${y}%;
+    --d: ${duration}s;
+    --delay: -${delay}s;
+    --min-op: ${minOp};
+    --max-op: ${maxOp};
+  `;
+  starsLayer.appendChild(star);
+}
+
+// Shooting star occasionally
+function shootingStar() {
+  const s = document.createElement('div');
+  s.style.cssText = `
+    position: absolute;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(to left, rgba(255,255,255,0.8), transparent);
+    top: ${Math.random() * 40}%;
+    left: ${Math.random() * 60 + 10}%;
+    transform: rotate(-30deg);
+    animation: shoot 0.8s linear forwards;
+  `;
+  document.querySelector('.stars-layer').appendChild(s);
+  const style = document.createElement('style');
+  style.textContent = `@keyframes shoot { from { opacity:1; transform: translateX(0) rotate(-30deg); } to { opacity:0; transform: translateX(-180px) rotate(-30deg); } }`;
+  document.head.appendChild(style);
+  setTimeout(() => s.remove(), 900);
+}
+
+setInterval(shootingStar, 5000);
+shootingStar();
+</script>
+</body>
+</html>
